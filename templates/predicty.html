@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+<div class="form">
+    <form action="/predicty" method="POST">
+        <input type="radio" id="miasto" name="spalania" value="miasto">
+        <label for="miasto">Spalanie w Mieście</label><br>
+        <input type="radio" id="trasa" name="spalania" value="trasa">
+        <label for="trasa">Spalanie w Trasie</label><br>
+        <input type="radio" id="mieszany" name="spalania" value="mieszany">
+        <label for="mieszany">Spalanie w Cyklu Mieszanym</label>
+        <br>
+        <input type="text" name="moc_klient" id="moc_klient" placeholder="Moc">
+        <input type="submit" value="Sprawdź Spalanie">
+    </form>
+</div>
+{% if wynik is number %}
+    <label id="wynik_spalanie">Twoje średnie spalanie wyniesie {{wynik}} litrów</label>
+{% endif %}
+{% endblock %}

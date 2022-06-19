@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+<div class="form">
+    <form name="formularz" action="/uaktualnij/{{ wpisy[0][6] }}" method="POST">
+        <label for="lista_modele">Pojazd:</label>
+    <select name="lista_modele" id="lista_modele">
+    {% for marka in marki %}
+        <optgroup label="{{ marka[0] }}"></optgroup>
+        {% for model in modele %}
+            {% if model[0] == marka[0] %}
+                {% if model[1] == wpisy[0][1] %}
+                    <option value="{{ model[1] }}" selected>{{ model[1] }}</option>
+                {% else %}
+                    <option value="{{ model[1] }}">{{ model[1] }}</option>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </select>
+        {% for wpis in wpisy %}
+        <br>
+        <label>Spalanie Miasto: </label>
+        <input type="text" name="sp_miasto" id="sp_miasto" value="{{wpis[2]}}">
+        <br>
+        <label>Spalanie Trasa: </label>
+        <input type="text" name="sp_trasa" id="sp_trasa" value="{{wpis[3]}}">
+        <br>
+        <label>Spalanie Cykl Mieszany: </label>
+        <input type="text" name="sp_mieszane" id="sp_mieszane" value="{{wpis[4]}}">
+        <br>
+        <label>Moc: </label>
+        <input type="text" name="moc" id="moc" value="{{wpis[5]}}">
+        <br>
+        <input type="submit" value="Dodaj Wpis">
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}

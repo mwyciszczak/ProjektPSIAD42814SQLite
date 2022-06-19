@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+Wprowadzanie
+<div class="form">
+    <form action="/wprowadzanie" method="POST">
+        <label for="lista_modele">Pojazd:</label>
+    <select name="lista_modele" id="lista_modele">
+    {% for marka in marki %}
+        <optgroup label="{{ marka[0] }}"></optgroup>
+        {% for model in modele %}
+            {% if model[0] == marka[0] %}
+                <option value="{{ model[1] }}">{{ model[1] }}</option>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </select>
+        <input type="text" name="sp_miasto" id="sp_miasto" placeholder="Spalanie w mieście">
+        <input type="text" name="sp_trasa" id="sp_trasa" placeholder="Spalanie w trasie">
+        <input type="text" name="sp_mieszane" id="sp_mieszane" placeholder="Cykl mieszany">
+        <input type="text" name="moc" id="moc" placeholder="Moc(Km)">
+        <input type="submit" value="Dodaj Wpis">
+    </form>
+</div>
+<div class="wpisy">
+    <table>
+        <tr>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Spalanie w mieście</th>
+            <th>Spalanie w trasie</th>
+            <th>Cykl mieszany</th>
+            <th>Moc</th>
+        </tr>
+        {% for wpis in wpisy %}
+            <tr>
+                <td>{{ wpis[0] }}</td>
+                <td>{{ wpis[1] }}</td>
+                <td>{{ wpis[2] }}</td>
+                <td>{{ wpis[3] }}</td>
+                <td>{{ wpis[4] }}</td>
+                <td>{{ wpis[5] }}</td>
+                <td>
+                    <a href="usun/{{ wpis[6] }}">Usuń Wpis</a>
+                    <br>
+                    <a href="uaktualnij/{{ wpis[6] }}">Zaktualizuj Wpis</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock %}
